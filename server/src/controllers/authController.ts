@@ -157,3 +157,24 @@ export const getCurrentUser = async (req: AuthRequest, res: Response): Promise<v
         });
     }
 };
+/**
+ * @route   GET /api/auth/users
+ * @desc    Obtener todos los usuarios
+ * @access  Private
+ */
+export const getAllUsers = async (req: AuthRequest, res: Response): Promise<void> => {
+    try {
+        const users = await User.find({}, 'username role createdAt');
+
+        res.json({
+            success: true,
+            data: users
+        });
+    } catch (error) {
+        console.error('Error al obtener usuarios:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Error al obtener usuarios'
+        });
+    }
+};

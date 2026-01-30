@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { login, register, getCurrentUser } from '../controllers/authController';
+import { login, register, getCurrentUser, getAllUsers } from '../controllers/authController';
 import { authMiddleware } from '../middleware/auth';
 
 const router = Router();
@@ -17,5 +17,8 @@ router.post('/register', register);
 
 // @route   GET /api/auth/me (protegida)
 router.get('/me', authMiddleware, getCurrentUser);
+
+// @route   GET /api/auth/users (protegida)
+router.get('/users', authMiddleware, getAllUsers);
 
 export default router;

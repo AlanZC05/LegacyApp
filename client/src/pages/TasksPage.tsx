@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Task, Project, TaskStatus, TaskPriority, TaskFormDTO } from '../types';
+import { Task, Project, TaskStatus, TaskPriority, TaskFormDTO, User } from '../types';
 import { taskService } from '../services/taskService';
 import { projectService } from '../services/projectService';
+import { userService } from '../services/userService';
 import { Header } from '../components/layout/Header';
 import { Navigation } from '../components/layout/Navigation';
 import { Stats } from '../components/layout/Stats';
@@ -10,19 +11,10 @@ import { Button } from '../components/ui/Button';
 import { Input } from '../components/ui/Input';
 import { Select } from '../components/ui/Select';
 
-/**
- * Página de Gestión de Tareas
- * CRUD completo de tareas con diseño centrado y estético
- */
 export const TasksPage: React.FC = () => {
     const [tasks, setTasks] = useState<Task[]>([]);
     const [projects, setProjects] = useState<Project[]>([]);
-    const [users] = useState<{ _id: string; username: string }[]>([
-        { _id: '1', username: 'Sin asignar' },
-        { _id: 'admin', username: 'Admin' },
-        { _id: 'user1', username: 'User1' },
-        { _id: 'user2', username: 'User2' }
-    ]);
+    const [users, setUsers] = useState<User[]>([]);
 
     const [selectedTask, setSelectedTask] = useState<Task | null>(null);
     const [showForm, setShowForm] = useState(false);
@@ -42,7 +34,19 @@ export const TasksPage: React.FC = () => {
     useEffect(() => {
         loadTasks();
         loadProjects();
+        loadUsers();
     }, []);
+
+    // ... (loadTasks, loadProjects)
+
+    const loadUsers = async () => {
+        try {
+            const data = await userService.getUsers();
+            setUsers(data);
+        } catch (_) {
+            console.error('Error al cargar usuarios');
+        }
+    };
 
     const loadTasks = async () => {
         try {
@@ -83,15 +87,23 @@ export const TasksPage: React.FC = () => {
             return;
         }
 
+        // Limpiar datos para enviar (convertir strings vacíos a undefined para que no fallen los Cast de Mongoose)
+        const taskData = {
+            ...formData,
+            projectId: formData.projectId || undefined,
+            assignedTo: formData.assignedTo || undefined,
+            dueDate: formData.dueDate || undefined
+        };
+
         setLoading(true);
         try {
             if (selectedTask) {
                 // Actualizar
-                await taskService.updateTask(selectedTask._id, formData);
+                await taskService.updateTask(selectedTask._id, taskData);
                 alert('Tarea actualizada exitosamente');
             } else {
                 // Crear
-                await taskService.createTask(formData);
+                await taskService.createTask(taskData);
                 alert('Tarea creada exitosamente');
             }
             await loadTasks();
