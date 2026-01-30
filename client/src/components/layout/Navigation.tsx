@@ -22,7 +22,7 @@ export const Navigation: React.FC = () => {
     return (
         <nav className="bg-white border-b border-gray-200">
             <div className="container mx-auto px-4">
-                <div className="flex space-x-1 overflow-x-auto">
+                <div className="flex justify-center space-x-1 overflow-x-auto">
                     {navItems.map((item) => {
                         const isActive = location.pathname === item.path;
                         return (
@@ -30,8 +30,8 @@ export const Navigation: React.FC = () => {
                                 key={item.path}
                                 to={item.path}
                                 className={`px-4 py-3 font-medium text-sm whitespace-nowrap border-b-2 transition-colors ${isActive
-                                        ? 'border-primary-600 text-primary-600'
-                                        : 'border-transparent text-gray-600 hover:text-gray-800 hover:border-gray-300'
+                                    ? 'border-primary-600 text-primary-600'
+                                    : 'border-transparent text-gray-600 hover:text-gray-800 hover:border-gray-300'
                                     }`}
                             >
                                 {item.label}
