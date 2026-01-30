@@ -25,30 +25,30 @@ export const Stats: React.FC = () => {
     if (!stats) return null;
 
     return (
-        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white p-4">
-            <div className="container mx-auto">
-                <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-                    <div className="text-center">
-                        <p className="text-2xl font-bold">{stats.total}</p>
-                        <p className="text-sm opacity-90">Total</p>
-                    </div>
-                    <div className="text-center">
-                        <p className="text-2xl font-bold">{stats.completed}</p>
-                        <p className="text-sm opacity-90">Completadas</p>
-                    </div>
-                    <div className="text-center">
-                        <p className="text-2xl font-bold">{stats.pending}</p>
-                        <p className="text-sm opacity-90">Pendientes</p>
-                    </div>
-                    <div className="text-center">
-                        <p className="text-2xl font-bold">{stats.highPriority}</p>
-                        <p className="text-sm opacity-90">Alta Prioridad</p>
-                    </div>
-                    <div className="text-center">
-                        <p className="text-2xl font-bold text-red-300">{stats.overdue}</p>
-                        <p className="text-sm opacity-90">Vencidas</p>
-                    </div>
-                </div>
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
+            <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col items-center justify-center transform hover:scale-105 transition-transform duration-200">
+                <span className="text-3xl font-bold text-gray-600">{stats.total}</span>
+                <span className="text-sm font-medium text-gray-400 uppercase tracking-wider mt-1">Total</span>
+            </div>
+
+            <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col items-center justify-center transform hover:scale-105 transition-transform duration-200">
+                <span className="text-3xl font-bold text-green-600">{stats.completed}</span>
+                <span className="text-sm font-medium text-gray-400 uppercase tracking-wider mt-1">Completadas</span>
+            </div>
+
+            <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col items-center justify-center transform hover:scale-105 transition-transform duration-200">
+                <span className="text-3xl font-bold text-elegant-burgundy">{stats.pending}</span>
+                <span className="text-sm font-medium text-gray-400 uppercase tracking-wider mt-1">Pendientes</span>
+            </div>
+
+            <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col items-center justify-center transform hover:scale-105 transition-transform duration-200">
+                <span className="text-3xl font-bold text-orange-400">{stats.highPriority}</span>
+                <span className="text-sm font-medium text-gray-400 uppercase tracking-wider mt-1">Alta Prio.</span>
+            </div>
+
+            <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col items-center justify-center transform hover:scale-105 transition-transform duration-200">
+                <span className="text-3xl font-bold text-red-500">{stats.overdue}</span>
+                <span className="text-sm font-medium text-gray-400 uppercase tracking-wider mt-1">Vencidas</span>
             </div>
         </div>
     );

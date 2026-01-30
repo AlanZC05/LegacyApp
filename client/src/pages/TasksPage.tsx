@@ -152,7 +152,7 @@ export const TasksPage: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50 pb-12">
+        <div className="min-h-screen bg-elegant-cream pb-12">
             <Header />
             <Navigation />
 
@@ -171,7 +171,7 @@ export const TasksPage: React.FC = () => {
                         <Button
                             variant="primary"
                             onClick={handleOpenNewTask}
-                            className="shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all"
+                            className="shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all bg-elegant-blue text-gray-800 border-none hover:bg-[#b0c4d6]"
                         >
                             ➕ Nueva Tarea
                         </Button>
@@ -285,7 +285,7 @@ export const TasksPage: React.FC = () => {
                                         type="submit"
                                         variant="primary"
                                         disabled={loading}
-                                        className="min-w-[120px]"
+                                        className="min-w-[120px] bg-elegant-blue text-gray-800 hover:bg-[#b0c4d6]"
                                     >
                                         {selectedTask ? 'Guardar Cambios' : 'Crear Tarea'}
                                     </Button>
@@ -300,7 +300,7 @@ export const TasksPage: React.FC = () => {
                     <div className="overflow-x-auto">
                         <table className="w-full text-left border-collapse">
                             <thead>
-                                <tr className="bg-gray-50 border-b border-gray-100">
+                                <tr className="bg-elegant-blue border-b border-gray-100">
                                     <th className="p-5 font-semibold text-gray-600 text-sm tracking-wider">Tarea</th>
                                     <th className="p-5 font-semibold text-gray-600 text-sm tracking-wider">Estado</th>
                                     <th className="p-5 font-semibold text-gray-600 text-sm tracking-wider">Prioridad</th>
@@ -311,7 +311,7 @@ export const TasksPage: React.FC = () => {
                             <tbody className="divide-y divide-gray-50">
                                 {tasks.length === 0 ? (
                                     <tr>
-                                        <td colSpan={5} className="text-center p-12">
+                                        <td colSpan={6} className="text-center p-12">
                                             <div className="flex flex-col items-center justify-center text-gray-400">
                                                 <svg className="w-16 h-16 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
                                                 <p className="text-lg font-medium">No hay tareas pendientes</p>
@@ -349,9 +349,9 @@ export const TasksPage: React.FC = () => {
                                             <td className="p-5">
                                                 <div className="flex items-center gap-2">
                                                     <span className={`w-2 h-2 rounded-full ${task.priority === 'Crítica' ? 'bg-red-500' :
-                                                            task.priority === 'Alta' ? 'bg-orange-500' :
-                                                                task.priority === 'Media' ? 'bg-yellow-400' :
-                                                                    'bg-gray-400'
+                                                        task.priority === 'Alta' ? 'bg-orange-500' :
+                                                            task.priority === 'Media' ? 'bg-yellow-400' :
+                                                                'bg-gray-400'
                                                         }`}></span>
                                                     <span className="text-sm text-gray-700">{task.priority}</span>
                                                 </div>
