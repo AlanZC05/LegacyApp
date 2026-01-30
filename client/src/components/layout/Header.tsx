@@ -10,7 +10,7 @@ export const Header: React.FC = () => {
     const { user, logout } = useAuth();
 
     return (
-        <header className="bg-elegant-cream border-b border-elegant-blue/30">
+        <header className="bg-white border-b border-elegant-blue/30">
             <div className="container mx-auto px-4 py-4 flex justify-between items-center">
                 <div>
                     <h1 className="text-3xl font-serif font-bold text-black italic">Task Manager</h1>

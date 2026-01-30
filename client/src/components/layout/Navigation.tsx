@@ -20,7 +20,7 @@ export const Navigation: React.FC = () => {
     const location = useLocation();
 
     return (
-        <nav className="bg-elegant-cream border-b border-gray-200">
+        <nav className="bg-white border-b border-gray-200">
             <div className="container mx-auto px-4">
                 <div className="flex justify-center space-x-1 overflow-x-auto">
                     {navItems.map((item) => {
