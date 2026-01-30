@@ -28,7 +28,7 @@ const NotificationSchema = new Schema<INotification>({
     },
     type: {
         type: String,
-        enum: ['task_assigned', 'task_updated', 'task_completed', 'comment_added', 'other'],
+        enum: ['task_assigned', 'task_created', 'task_updated', 'task_completed', 'comment_added', 'export_completed', 'other'],
         default: 'other'
     },
     read: {

@@ -17,8 +17,9 @@ export const Header: React.FC = () => {
 
     const loadNotifications = async () => {
         try {
-            setLoading(true);
+            // setLoading(true); // Evitar loading parpadeante en polling
             const data = await notificationService.getNotifications();
+            // console.log('Notificaciones cargadas:', data.length);
             setNotifications(data);
         } catch (error) {
             console.error('Error al cargar notificaciones', error);
@@ -35,6 +36,13 @@ export const Header: React.FC = () => {
     };
 
     const unreadCount = notifications.filter(n => !n.read).length;
+
+    // Cargar notificaciones y polling
+    useEffect(() => {
+        loadNotifications();
+        const interval = setInterval(loadNotifications, 3000); // Polling cada 3s para prueba
+        return () => clearInterval(interval);
+    }, []);
 
     // Cerrar al hacer click fuera
     useEffect(() => {

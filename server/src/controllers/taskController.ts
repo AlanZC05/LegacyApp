@@ -89,13 +89,25 @@ export const createTask = async (req: AuthRequest, res: Response): Promise<void>
             newValue: task.title
         });
 
-        // Crear notificación si está asignada
-        if (task.assignedTo) {
+        // Crear notificaciones (aseguradas con try/catch)
+        try {
+            // 1. Notificar al creador (Confirmación visual)
             await Notification.create({
-                userId: task.assignedTo,
-                message: `Nueva tarea asignada: ${task.title}`,
-                type: 'task_assigned'
+                userId: req.user?._id,
+                message: `Has creado la tarea: ${task.title}`,
+                type: 'task_created'
             });
+
+            // 2. Notificar al asignado (si es diferente al creador)
+            if (task.assignedTo && task.assignedTo.toString() !== req.user?._id.toString()) {
+                await Notification.create({
+                    userId: task.assignedTo,
+                    message: `Nueva tarea asignada: ${task.title}`,
+                    type: 'task_assigned'
+                });
+            }
+        } catch (notifError) {
+            console.error('Error al crear notificaciones de tarea:', notifError);
         }
 
         const populatedTask = await Task.findById(task._id)
@@ -165,12 +177,25 @@ export const updateTask = async (req: AuthRequest, res: Response): Promise<void>
         }
 
         // Crear notificación si está asignada
-        if (task?.assignedTo) {
+        // Crear notificaciones de actualización
+        try {
+            // 1. Notificar al usuario actual que realizó la acción
             await Notification.create({
-                userId: task.assignedTo,
-                message: `Tarea actualizada: ${task.title}`,
+                userId: req.user?._id,
+                message: `Has actualizado la tarea: ${task?.title}`,
                 type: 'task_updated'
             });
+
+            // 2. Notificar al asignado si es diferente al usuario actual
+            if (task?.assignedTo && task.assignedTo.toString() !== req.user?._id.toString()) {
+                await Notification.create({
+                    userId: task.assignedTo,
+                    message: `Tarea actualizada: ${task.title}`,
+                    type: 'task_updated'
+                });
+            }
+        } catch (notifError) {
+            console.error('Error al crear notificaciones de actualización:', notifError);
         }
 
         res.json({

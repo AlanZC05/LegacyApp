@@ -8,7 +8,8 @@ export enum HistoryAction {
     STATUS_CHANGED = 'STATUS_CHANGED',
     TITLE_CHANGED = 'TITLE_CHANGED',
     UPDATED = 'UPDATED',
-    DELETED = 'DELETED'
+    DELETED = 'DELETED',
+    COMMENT_ADDED = 'COMMENT_ADDED'
 }
 
 /**

@@ -1,5 +1,5 @@
 import { Response } from 'express';
-import { Task, Project, User } from '../models';
+import { Task, Project, User, Notification } from '../models';
 import { AuthRequest } from '../middleware/auth';
 
 /**
@@ -114,6 +114,13 @@ export const exportCSV = async (req: AuthRequest, res: Response): Promise<void> 
             const dueDate = task.dueDate ? new Date(task.dueDate).toLocaleDateString() : 'Sin fecha';
 
             csv += `${task._id},"${task.title}","${task.status}","${task.priority}","${projectName}","${assignedName}","${dueDate}"\n`;
+        });
+
+        // Crear notificación de exportación
+        await Notification.create({
+            userId: req.user?._id,
+            message: 'Has exportado las tareas a CSV exitosamente',
+            type: 'export_completed'
         });
 
         res.setHeader('Content-Type', 'text/csv');

@@ -1,5 +1,5 @@
 import { Response } from 'express';
-import { Comment } from '../models';
+import { Comment, Notification, Task, History, HistoryAction } from '../models';
 import { AuthRequest } from '../middleware/auth';
 
 /**
@@ -44,6 +44,33 @@ export const createComment = async (req: AuthRequest, res: Response): Promise<vo
         };
 
         const comment = await Comment.create(commentData);
+
+        // Notificar al asignado de la tarea (siempre, para feedback inmediato)
+        try {
+            const task = await Task.findById(commentData.taskId);
+            if (task && task.assignedTo) {
+                console.log('Creando notificación para:', task.assignedTo, 'Tipo: comment_added');
+                await Notification.create({
+                    userId: task.assignedTo,
+                    message: `Nuevo comentario en: ${task.title}`,
+                    type: 'comment_added'
+                });
+            } else {
+                console.log('No se creó notificación: Tarea no encontrada o sin asignado', commentData.taskId);
+            }
+        } catch (notifError) {
+            console.error('Error al crear notificación de comentario:', notifError);
+        }
+
+        // Registrar en historial
+        await History.create({
+            taskId: commentData.taskId,
+            userId: req.user?._id,
+            action: HistoryAction.COMMENT_ADDED,
+            oldValue: '',
+            newValue: 'Nuevo comentario'
+        });
+
         const populatedComment = await Comment.findById(comment._id)
             .populate('userId', 'username');
 
