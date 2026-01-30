@@ -40,7 +40,7 @@ export const LoginForm: React.FC = () => {
                     <h1 className="text-3xl font-bold text-gray-800 mb-2">
                         Task Manager
                     </h1>
-                    <p className="text-gray-600">MERN Stack - Sistema Profesional</p>
+                    <p className="text-gray-600">Sistema Profesional</p>
                 </div>
 
                 <form onSubmit={handleSubmit}>
