@@ -100,9 +100,10 @@ export const ProjectsPage: React.FC = () => {
             <Navigation />
 
             <div className="container mx-auto px-4 py-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Grid Superior: Formulario y Lista de Proyectos */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    {/* Columna Izquierda: Formulario */}
                     <div className="space-y-6">
-                        {/* Formulario */}
                         <Card title={selectedProject ? 'Editar Proyecto' : 'Nuevo Proyecto'}>
                             <form onSubmit={handleSubmit}>
                                 <Input
@@ -147,48 +148,12 @@ export const ProjectsPage: React.FC = () => {
                                 </div>
                             </form>
                         </Card>
-
-                        {/* Lista de Tareas del Proyecto */}
-                        {selectedProject && (
-                            <Card title={`Tareas de ${selectedProject.name}`}>
-                                <div className="space-y-2 max-h-96 overflow-y-auto pr-2">
-                                    {projectTasks.length === 0 ? (
-                                        <p className="text-center text-gray-500 py-4 text-sm">No hay tareas asociadas</p>
-                                    ) : (
-                                        projectTasks.map(task => (
-                                            <div key={task._id} className="p-3 bg-gray-50 rounded-lg border border-gray-100 flex justify-between items-center">
-                                                <div>
-                                                    <p className="font-medium text-gray-800 text-sm">{task.title}</p>
-                                                    <div className="flex items-center gap-2 mt-1">
-                                                        <span className={`text-xs px-2 py-0.5 rounded-full ${task.status === 'Completada' ? 'bg-green-100 text-green-700' :
-                                                                task.status === 'En Progreso' ? 'bg-blue-100 text-blue-700' :
-                                                                    'bg-gray-200 text-gray-700'
-                                                            }`}>
-                                                            {task.status}
-                                                        </span>
-                                                        <span className="text-xs text-gray-500">
-                                                            {task.assignedTo && typeof task.assignedTo === 'object' ?
-                                                                `• ${task.assignedTo.username}` : ''}
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <span className={`w-2 h-2 rounded-full ${task.priority === 'Crítica' ? 'bg-red-500' :
-                                                        task.priority === 'Alta' ? 'bg-orange-500' :
-                                                            task.priority === 'Media' ? 'bg-yellow-400' :
-                                                                'bg-gray-300'
-                                                    }`}></span>
-                                            </div>
-                                        ))
-                                    )}
-                                </div>
-                            </Card>
-                        )}
                     </div>
 
-                    {/* Lista de Proyectos */}
+                    {/* Columna Derecha: Lista de Proyectos */}
                     <div>
                         <Card title="Lista de Proyectos">
-                            <div className="space-y-3">
+                            <div className="space-y-3 max-h-[500px] overflow-y-auto pr-2">
                                 {projects.length === 0 ? (
                                     <p className="text-center text-gray-500 py-8">No hay proyectos</p>
                                 ) : (
@@ -197,8 +162,8 @@ export const ProjectsPage: React.FC = () => {
                                             key={project._id}
                                             onClick={() => handleSelectProject(project)}
                                             className={`p-4 border rounded-lg cursor-pointer transition-colors ${selectedProject?._id === project._id ?
-                                                    'bg-blue-50 border-blue-200 ring-1 ring-blue-200' :
-                                                    'border-gray-200 hover:bg-blue-50/50'
+                                                'bg-blue-50 border-blue-200 ring-1 ring-blue-200' :
+                                                'border-gray-200 hover:bg-blue-50/50'
                                                 }`}
                                         >
                                             <h3 className="font-semibold text-gray-800">{project.name}</h3>
@@ -210,6 +175,55 @@ export const ProjectsPage: React.FC = () => {
                         </Card>
                     </div>
                 </div>
+
+                {/* Sección Inferior: Lista de Tareas del Proyecto (Ancho Completo) */}
+                {selectedProject && (
+                    <div className="w-full">
+                        <Card title={`Tareas de ${selectedProject.name}`}>
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-h-[600px] overflow-y-auto pr-2 p-2">
+                                {projectTasks.length === 0 ? (
+                                    <p className="col-span-full text-center text-gray-500 py-8 text-lg">No hay tareas asociadas a este proyecto</p>
+                                ) : (
+                                    projectTasks.map(task => (
+                                        <div key={task._id} className="p-4 bg-white rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+                                            <div className="flex justify-between items-start mb-2">
+                                                <h4 className="font-semibold text-gray-800 line-clamp-1">{task.title}</h4>
+                                                <span className={`w-3 h-3 rounded-full flex-shrink-0 mt-1.5 ${task.priority === 'Crítica' ? 'bg-red-500' :
+                                                    task.priority === 'Alta' ? 'bg-orange-500' :
+                                                        task.priority === 'Media' ? 'bg-yellow-400' :
+                                                            'bg-gray-300'
+                                                    }`} title={`Prioridad: ${task.priority}`}></span>
+                                            </div>
+
+                                            <p className="text-sm text-gray-600 mb-3 line-clamp-2 min-h-[40px]">{task.description || 'Sin descripción'}</p>
+
+                                            <div className="flex flex-col gap-2 mt-auto">
+                                                <div className="flex items-center justify-between">
+                                                    <span className={`text-xs px-2.5 py-1 rounded-full font-medium ${task.status === 'Completada' ? 'bg-green-100 text-green-700' :
+                                                        task.status === 'En Progreso' ? 'bg-blue-100 text-blue-700' :
+                                                            'bg-gray-100 text-gray-700'
+                                                        }`}>
+                                                        {task.status}
+                                                    </span>
+                                                    <span className="text-xs text-gray-500">
+                                                        {new Date(task.createdAt || Date.now()).toLocaleDateString()}
+                                                    </span>
+                                                </div>
+
+                                                {task.assignedTo && typeof task.assignedTo === 'object' && (
+                                                    <div className="text-xs text-gray-500 border-t border-gray-100 pt-2 flex items-center gap-1">
+                                                        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                                                        {task.assignedTo.username}
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </div>
+                                    ))
+                                )}
+                            </div>
+                        </Card>
+                    </div>
+                )}
             </div>
         </div>
     );
