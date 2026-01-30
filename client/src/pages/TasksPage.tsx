@@ -78,6 +78,11 @@ export const TasksPage: React.FC = () => {
             return;
         }
 
+        if (formData.estimatedHours !== undefined && (formData.estimatedHours < 0 || formData.estimatedHours > 100)) {
+            alert('Las horas estimadas deben ser un valor coherente (0 - 100)');
+            return;
+        }
+
         setLoading(true);
         try {
             if (selectedTask) {
@@ -270,6 +275,8 @@ export const TasksPage: React.FC = () => {
                                         onChange={handleInputChange}
                                         step="0.5"
                                         min="0"
+                                        max="100"
+                                        placeholder="Máx 100h"
                                     />
                                 </div>
 
