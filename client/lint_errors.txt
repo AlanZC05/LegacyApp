@@ -1,0 +1,140 @@
+
+> client@0.0.0 lint
+> eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0
+
+
+C:\Users\alanm\Desktop\Legacyy\client\src\components\auth\LoginForm.tsx
+  29:23  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\alanm\Desktop\Legacyy\client\src\components\layout\Stats.tsx
+  13:9  error  Error: Cannot access variable before it is declared
+
+`loadStats` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+C:\Users\alanm\Desktop\Legacyy\client\src\components\layout\Stats.tsx:13:9
+  11 |
+  12 |     useEffect(() => {
+> 13 |         loadStats();
+     |         ^^^^^^^^^ `loadStats` accessed before it is declared
+  14 |     }, []);
+  15 |
+  16 |     const loadStats = async () => {
+
+C:\Users\alanm\Desktop\Legacyy\client\src\components\layout\Stats.tsx:16:5
+  14 |     }, []);
+  15 |
+> 16 |     const loadStats = async () => {
+     |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 17 |         try {
+     | ^^^^^^^^^^^^^
+> 18 |             const data = await taskService.getStats();
+     | ^^^^^^^^^^^^^
+> 19 |             setStats(data);
+     | ^^^^^^^^^^^^^
+> 20 |         } catch (error) {
+     | ^^^^^^^^^^^^^
+> 21 |             console.error('Error al cargar estadísticas:', error);
+     | ^^^^^^^^^^^^^
+> 22 |         }
+     | ^^^^^^^^^^^^^
+> 23 |     };
+     | ^^^^^^^ `loadStats` is declared here
+  24 |
+  25 |     if (!stats) return null;
+  26 |  react-hooks/immutability
+
+C:\Users\alanm\Desktop\Legacyy\client\src\context\AuthContext.tsx
+  59:11  error    Unnecessary catch clause                                                                                                        no-useless-catch
+  86:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Users\alanm\Desktop\Legacyy\client\src\pages\NotificationsPage.tsx
+  16:9   error  Error: Cannot access variable before it is declared
+
+`loadNotifications` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+C:\Users\alanm\Desktop\Legacyy\client\src\pages\NotificationsPage.tsx:16:9
+  14 |
+  15 |     useEffect(() => {
+> 16 |         loadNotifications();
+     |         ^^^^^^^^^^^^^^^^^ `loadNotifications` accessed before it is declared
+  17 |     }, []);
+  18 |
+  19 |     const loadNotifications = async () => {
+
+C:\Users\alanm\Desktop\Legacyy\client\src\pages\NotificationsPage.tsx:19:5
+  17 |     }, []);
+  18 |
+> 19 |     const loadNotifications = async () => {
+     |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 20 |         try {
+     | ^^^^^^^^^^^^^
+> 21 |             const data = await notificationService.getNotifications();
+     | ^^^^^^^^^^^^^
+> 22 |             setNotifications(data);
+     | ^^^^^^^^^^^^^
+> 23 |         } catch (error) {
+     | ^^^^^^^^^^^^^
+> 24 |             alert('Error al cargar notificaciones');
+     | ^^^^^^^^^^^^^
+> 25 |         }
+     | ^^^^^^^^^^^^^
+> 26 |     };
+     | ^^^^^^^ `loadNotifications` is declared here
+  27 |
+  28 |     const handleMarkAsRead = async () => {
+  29 |         try {  react-hooks/immutability
+  23:18  error  'error' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          @typescript-eslint/no-unused-vars
+  33:18  error  'error' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          @typescript-eslint/no-unused-vars
+
+C:\Users\alanm\Desktop\Legacyy\client\src\pages\ProjectsPage.tsx
+  20:9   error  Error: Cannot access variable before it is declared
+
+`loadProjects` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+C:\Users\alanm\Desktop\Legacyy\client\src\pages\ProjectsPage.tsx:20:9
+  18 |
+  19 |     useEffect(() => {
+> 20 |         loadProjects();
+     |         ^^^^^^^^^^^^ `loadProjects` accessed before it is declared
+  21 |     }, []);
+  22 |
+  23 |     const loadProjects = async () => {
+
+C:\Users\alanm\Desktop\Legacyy\client\src\pages\ProjectsPage.tsx:23:5
+  21 |     }, []);
+  22 |
+> 23 |     const loadProjects = async () => {
+     |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 24 |         try {
+     | ^^^^^^^^^^^^^
+> 25 |             const data = await projectService.getProjects();
+     | ^^^^^^^^^^^^^
+> 26 |             setProjects(data);
+     | ^^^^^^^^^^^^^
+> 27 |         } catch (error) {
+     | ^^^^^^^^^^^^^
+> 28 |             alert('Error al cargar proyectos');
+     | ^^^^^^^^^^^^^
+> 29 |         }
+     | ^^^^^^^^^^^^^
+> 30 |     };
+     | ^^^^^^^ `loadProjects` is declared here
+  31 |
+  32 |     const handleSubmit = async (e: React.FormEvent) => {
+  33 |         e.preventDefault();  react-hooks/immutability
+  27:18  error  'error' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                @typescript-eslint/no-unused-vars
+  49:18  error  'error' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                @typescript-eslint/no-unused-vars
+  64:18  error  'error' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                @typescript-eslint/no-unused-vars
+
+C:\Users\alanm\Desktop\Legacyy\client\src\pages\TasksPage.tsx
+   89:25  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  110:18  error  'error' is defined but never used         @typescript-eslint/no-unused-vars
+
+C:\Users\alanm\Desktop\Legacyy\client\src\services\index.ts
+  56:17  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  64:43  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  69:46  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  74:43  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+✖ 17 problems (16 errors, 1 warning)
+

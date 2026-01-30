@@ -1,0 +1,2 @@
+src/pages/TasksPage.tsx(2,25): error TS6133: 'User' is declared but its value is never read.
+src/services/api.ts(10,29): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
