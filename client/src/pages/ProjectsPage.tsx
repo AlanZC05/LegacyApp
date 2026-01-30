@@ -134,7 +134,7 @@ export const ProjectsPage: React.FC = () => {
                                 </div>
 
                                 <div className="flex gap-2">
-                                    <Button type="submit" variant="primary" className="flex-1 bg-elegant-green text-white hover:bg-[#8FB593]">
+                                    <Button type="submit" variant="primary" className="flex-1">
                                         {selectedProject ? 'Actualizar' : 'Crear'}
                                     </Button>
                                     {selectedProject && (
@@ -143,7 +143,7 @@ export const ProjectsPage: React.FC = () => {
                                         </Button>
                                     )}
                                     <Button type="button" variant="secondary" onClick={handleClear}>
-                                        Limpiar
+                                        {selectedProject ? 'Cancelar' : 'Limpiar'}
                                     </Button>
                                 </div>
                             </form>
