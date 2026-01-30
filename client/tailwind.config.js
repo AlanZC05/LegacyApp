@@ -23,6 +23,7 @@ export default {
                     blue: '#C8D9E6',
                     cream: '#F5EFEB',
                     burgundy: '#D8B4BA',
+                    green: '#A7D3AC',
                 }
             },
             fontFamily: {

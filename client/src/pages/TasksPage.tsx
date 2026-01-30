@@ -171,7 +171,7 @@ export const TasksPage: React.FC = () => {
                         <Button
                             variant="primary"
                             onClick={handleOpenNewTask}
-                            className="shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all bg-elegant-blue text-gray-800 border-none hover:bg-[#b0c4d6]"
+                            className="shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all bg-elegant-green text-white border-none hover:bg-[#8FB593]"
                         >
                             ➕ Nueva Tarea
                         </Button>
@@ -285,7 +285,7 @@ export const TasksPage: React.FC = () => {
                                         type="submit"
                                         variant="primary"
                                         disabled={loading}
-                                        className="min-w-[120px] bg-elegant-blue text-gray-800 hover:bg-[#b0c4d6]"
+                                        className="min-w-[120px] bg-elegant-green text-white hover:bg-[#8FB593]"
                                     >
                                         {selectedTask ? 'Guardar Cambios' : 'Crear Tarea'}
                                     </Button>
