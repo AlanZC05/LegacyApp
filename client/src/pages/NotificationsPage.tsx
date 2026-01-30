@@ -49,7 +49,7 @@ export const NotificationsPage: React.FC = () => {
                             {unreadCount > 0 ? `${unreadCount} notificación(es) sin leer` : 'No hay notificaciones nuevas'}
                         </p>
                         {unreadCount > 0 && (
-                            <Button variant="primary" onClick={handleMarkAsRead}>
+                            <Button variant="primary" onClick={handleMarkAsRead} className="bg-elegant-green text-white hover:bg-[#8FB593]">
                                 Marcar todas como leídas
                             </Button>
                         )}
@@ -62,7 +62,7 @@ export const NotificationsPage: React.FC = () => {
                             notifications.map(notification => (
                                 <div
                                     key={notification._id}
-                                    className={`p-4 border rounded-lg ${notification.read ? 'bg-gray-50 border-gray-200' : 'bg-blue-50 border-blue-200'
+                                    className={`p-4 border rounded-lg ${notification.read ? 'bg-gray-50 border-gray-200' : 'bg-blue-50/50 border-blue-100'
                                         }`}
                                 >
                                     <div className="flex items-start justify-between">
@@ -73,7 +73,7 @@ export const NotificationsPage: React.FC = () => {
                                             </p>
                                         </div>
                                         {!notification.read && (
-                                            <span className="bg-blue-600 text-white text-xs px-2 py-1 rounded-full">
+                                            <span className="bg-elegant-burgundy text-white text-xs px-2 py-1 rounded-full">
                                                 Nueva
                                             </span>
                                         )}

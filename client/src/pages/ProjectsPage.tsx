@@ -110,7 +110,7 @@ export const ProjectsPage: React.FC = () => {
                             </div>
 
                             <div className="flex gap-2">
-                                <Button type="submit" variant="primary" className="flex-1">
+                                <Button type="submit" variant="primary" className="flex-1 bg-elegant-green text-white hover:bg-[#8FB593]">
                                     {selectedProject ? 'Actualizar' : 'Crear'}
                                 </Button>
                                 {selectedProject && (
@@ -135,7 +135,7 @@ export const ProjectsPage: React.FC = () => {
                                     <div
                                         key={project._id}
                                         onClick={() => handleSelectProject(project)}
-                                        className="p-4 border border-gray-200 rounded-lg hover:bg-primary-50 cursor-pointer transition-colors"
+                                        className="p-4 border border-gray-200 rounded-lg hover:bg-blue-50/50 cursor-pointer transition-colors"
                                     >
                                         <h3 className="font-semibold text-gray-800">{project.name}</h3>
                                         <p className="text-sm text-gray-600 mt-1">{project.description || 'Sin descripción'}</p>
