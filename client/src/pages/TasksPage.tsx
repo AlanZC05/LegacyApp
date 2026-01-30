@@ -296,7 +296,7 @@ export const TasksPage: React.FC = () => {
                 )}
 
                 {/* Lista de Tareas */}
-                <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
+                <div className="bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden">
                     <div className="overflow-x-auto">
                         <table className="w-full text-left border-collapse">
                             <thead>
