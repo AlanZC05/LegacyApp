@@ -54,6 +54,11 @@ export const CommentsPage: React.FC = () => {
         e.preventDefault();
         if (!selectedTask || !newComment.trim()) return;
 
+        if (newComment.length > 200) {
+            alert('El comentario no puede exceder los 200 caracteres');
+            return;
+        }
+
         try {
             await commentService.createComment({
                 taskId: selectedTask._id,
@@ -153,7 +158,8 @@ export const CommentsPage: React.FC = () => {
                                         type="text"
                                         value={newComment}
                                         onChange={(e) => setNewComment(e.target.value)}
-                                        placeholder="Escribe un comentario..."
+                                        placeholder="Escribe un comentario... (Max 200 caracteres)"
+                                        maxLength={200}
                                         className="flex-1 px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-elegant-green/50 focus:border-elegant-green transition-all"
                                     />
                                     <Button

@@ -69,8 +69,12 @@ export const TasksPage: React.FC = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (!formData.title) {
-            alert('El título es requerido');
+        if (!formData.title || formData.title.trim().length < 3) {
+            alert('El título debe tener al menos 3 caracteres');
+            return;
+        }
+        if (formData.title.length > 50) {
+            alert('El título no puede exceder los 50 caracteres');
             return;
         }
 
@@ -190,8 +194,10 @@ export const TasksPage: React.FC = () => {
                                             name="title"
                                             value={formData.title}
                                             onChange={handleInputChange}
-                                            placeholder="¿Qué necesitas hacer?"
+                                            placeholder="¿Qué necesitas hacer? (3-50 caracteres)"
                                             required
+                                            minLength={3}
+                                            maxLength={50}
                                         />
                                     </div>
 
@@ -204,9 +210,13 @@ export const TasksPage: React.FC = () => {
                                             value={formData.description}
                                             onChange={handleInputChange}
                                             rows={3}
+                                            maxLength={500}
                                             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-shadow"
-                                            placeholder="Detalles adicionales..."
+                                            placeholder="Detalles adicionales... (Max 500 caracteres)"
                                         />
+                                        <p className="text-xs text-gray-400 text-right mt-1">
+                                            {formData.description?.length || 0}/500
+                                        </p>
                                     </div>
 
                                     <Select

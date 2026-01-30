@@ -31,8 +31,12 @@ export const ProjectsPage: React.FC = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (!name) {
-            alert('El nombre es requerido');
+        if (!name || name.trim().length < 3) {
+            alert('El nombre debe tener al menos 3 caracteres');
+            return;
+        }
+        if (name.length > 50) {
+            alert('El nombre no puede exceder los 50 caracteres');
             return;
         }
 
@@ -92,8 +96,10 @@ export const ProjectsPage: React.FC = () => {
                                 label="Nombre *"
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
-                                placeholder="Nombre del proyecto"
+                                placeholder="Nombre del proyecto (3-50 caracteres)"
                                 required
+                                minLength={3}
+                                maxLength={50}
                             />
 
                             <div className="mb-4">
@@ -104,9 +110,13 @@ export const ProjectsPage: React.FC = () => {
                                     value={description}
                                     onChange={(e) => setDescription(e.target.value)}
                                     rows={3}
+                                    maxLength={200}
                                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                                    placeholder="Descripción del proyecto"
+                                    placeholder="Descripción del proyecto (Max 200 caracteres)"
                                 />
+                                <p className="text-xs text-gray-400 text-right mt-1">
+                                    {description.length}/200
+                                </p>
                             </div>
 
                             <div className="flex gap-2">
